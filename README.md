@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/john-yuan/base64.js.svg?branch=master)](https://travis-ci.org/john-yuan/base64.js)
 
-A base 64 util for multi-byte string in JavaScript. It can be used to encode multi-byte string, like Chinese or string containing emoji, to base 64 format string or decode base 64 encoded string to the original one. It also supports base 64 URL safe encoding/decoding. 
+A base 64 util for multi-byte string in JavaScript. It can be used to encode multi-byte string, like Chinese or string containing emoji, to base 64 format string or decode base 64 encoded string to the original one. It also supports base 64 URL-safe encoding/decoding. 
 
 [Click here to try it online.][baseb4onlie]
 
@@ -10,8 +10,8 @@ API:
 
 * [base64.encodeBase64(str)](#base64encodebase64str)
 * [base64.encodeBase64UrlSafe(str)](#base64encodebase64urlsafestr)
-* [base64.decodeBase64(b64str)](#base64decodebase64b64str)
-* [base64.decodeBase64UrlSafe(b64strUrlSafe)](#base64decodebase64urlsafeb64strurlsafe)
+* [base64.decodeBase64(b64Str)](#base64decodebase64b64str)
+* [base64.decodeBase64UrlSafe(b64StrUrlSafe)](#base64decodebase64urlsafeb64strurlsafe)
 * [base64.str2bytes(str)](#base64str2bytesstr)
 * [base64.bytes2str(bytes)](#base64bytes2strbytes)
 
@@ -21,15 +21,15 @@ API:
 
 ```js
 var str = '🍎 is 苹果 in Chinese.';
-var b64str = base64.encodeBase64(str);
-var b64strUrlSafe = base64.encodeBase64UrlSafe(str);
-var str1 = base64.decodeBase64(b64str);
-var str2 = base64.decodeBase64UrlSafe(b64strUrlSafe);
+var b64Str = base64.encodeBase64(str);
+var b64StrUrlSafe = base64.encodeBase64UrlSafe(str);
+var str1 = base64.decodeBase64(b64Str);
+var str2 = base64.decodeBase64UrlSafe(b64StrUrlSafe);
 
 // 8J+NjiBpcyDoi7nmnpwgaW4gQ2hpbmVzZS4=
-console.log(b64str);
+console.log(b64Str);
 // 8J-NjiBpcyDoi7nmnpwgaW4gQ2hpbmVzZS4
-console.log(b64strUrlSafe);
+console.log(b64StrUrlSafe);
 // true
 console.log(str === str1);
 // true
@@ -47,23 +47,23 @@ This method is used to encode the given string to base 64 string.
 
 ### base64.encodeBase64UrlSafe(str)
 
-This method is used to encode the given string to base 64 url safe string.
+This method is used to encode the given string to base 64 URL-safe string.
 
-* `str` {string} the string to be encoded to base 64 url safe
-* Returns: {string} the base 64 url safe encoded string
+* `str` {string} the string to be encoded to base 64 URL-safe
+* Returns: {string} the base 64 URL-safe encoded string
 
-### base64.decodeBase64(b64str)
+### base64.decodeBase64(b64Str)
 
 This method is used to decode the base 64 string to the original string.
 
-* `b64str ` {string} the base 64 string to ne decoded
+* `b64Str ` {string} the base 64 string to ne decoded
 * Returns: {string} the decoded string
 
-### base64.decodeBase64UrlSafe(b64strUrlSafe)
+### base64.decodeBase64UrlSafe(b64StrUrlSafe)
 
-This method is used to decode the base 64 url safe string to the original string.
+This method is used to decode the base 64 URL-safe string to the original string.
 
-* `b64strUrlSafe ` {string} the base 64 url safe string to be decoded
+* `b64StrUrlSafe ` {string} the base 64 URL-safe string to be decoded
 * Returns: {string} the decoded string
 
 ### base64.str2bytes(str)
