@@ -4,6 +4,8 @@
 
 A base 64 util for multi-byte string in JavaScript. It can be used to encode multi-byte string, like Chinese or string containing emoji, to base 64 format string or decode base 64 encoded string to the original one. It also supports base 64 URL safe encoding/decoding. 
 
+[Click here to try it online.][baseb4onlie]
+
 API:
 
 * [base64.encodeBase64(str)](#base64encodebase64str)
@@ -12,6 +14,8 @@ API:
 * [base64.decodeBase64UrlSafe(b64strUrlSafe)](#base64decodebase64urlsafeb64strurlsafe)
 * [base64.str2bytes(str)](#base64str2bytesstr)
 * [base64.bytes2str(bytes)](#base64bytes2strbytes)
+
+[baseb4onlie]: https://john-yuan.github.io/base64.js/web/index.html
 
 ## Demo
 
