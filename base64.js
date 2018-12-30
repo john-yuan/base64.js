@@ -182,11 +182,11 @@ var base64 = (function () {
      *
      * @see decodeBase64
      * @see base64.encodeBase64
-     * @param {string} b64str the base64 string to be decoded
+     * @param {string} b64Str the base64 string to be decoded
      * @returns {string} the decoded string
      */
-    base64.decodeBase64 = function (b64str) {
-        return decodeBase64(b64str, b64Chars, '=');
+    base64.decodeBase64 = function (b64Str) {
+        return decodeBase64(b64Str, b64Chars, '=');
     };
     
     /**
@@ -205,11 +205,11 @@ var base64 = (function () {
      *
      * @see decodeBase64
      * @see base64.encodeBase64UrlSafe
-     * @param {string} b64strUrlSafe the base64 url safe encoded string
+     * @param {string} b64StrUrlSafe the base64 url safe encoded string
      * @returns {string} the decoded string
      */
-    base64.decodeBase64UrlSafe = function (b64strUrlSafe) {
-        return decodeBase64(b64strUrlSafe, b64UrlSafeChars, '');
+    base64.decodeBase64UrlSafe = function (b64StrUrlSafe) {
+        return decodeBase64(b64StrUrlSafe, b64UrlSafeChars, '');
     };
 
     return base64;
