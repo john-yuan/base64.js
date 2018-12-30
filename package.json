@@ -1,0 +1,19 @@
+{
+  "name": "base64",
+  "version": "1.0.0",
+  "description": "A library to convert multi-byte string to base64 encoded string.",
+  "main": "base64.js",
+  "scripts": {
+    "test": "node build.js && ./node_modules/.bin/mocha"
+  },
+  "keywords": [
+    "multi-byte",
+    "base64",
+    "emoji"
+  ],
+  "author": "JOHN YUAN",
+  "license": "MIT",
+  "devDependencies": {
+    "mocha": "^5.2.0"
+  }
+}
