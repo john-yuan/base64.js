@@ -1,5 +1,7 @@
 # Base64 for multi-byte string in JavaScript
 
+[![Build Status](https://travis-ci.org/john-yuan/base64.js.svg?branch=master)](https://travis-ci.org/john-yuan/base64.js)
+
 A base 64 util for multi-byte string in JavaScript. It can be used to encode multi-byte string, like Chinese or string containing emoji, to base64 format string or decode base 64 encoded string to the original one. It also supports base 64 URL safe encoding/decoding. 
 
 API:
