@@ -1,0 +1,112 @@
+html {
+    font-size: 14px;
+    background: #f1f1f1;
+}
+
+.container {
+    width: 600px;
+    background-color: #fff;
+    overflow: hidden;
+    padding: 1.25rem;
+    box-shadow: 2px 2px rgba(0, 0, 0, 0.02), -2px -2px rgba(0, 0, 0, 0.02);
+    border-radius: 4px;
+    border: 1px solid #ececec;
+    margin: 2rem auto;
+}
+
+.header {
+    text-align: center;
+    font-size: 0;
+}
+
+.type-inline-block {
+    display: inline-block;
+}
+
+.type-container {
+    display: flex;
+    font-size: 1rem;
+}
+
+.type-container .type-item {
+    padding: .5rem;
+    color: #0070e6;
+    border: 1px solid #0070e6;
+    cursor: pointer;
+    user-select: none;
+}
+.type-container .active {
+    background-color: #0070e6;
+    color: #fff;
+}
+.type-container .type-item:first-child {
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px;
+    border-right: 0;
+}
+.type-container .type-item:last-child {
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
+    border-left: 0;
+}
+
+.str-container {
+    margin-top: 1rem;
+}
+
+.textarea {
+    display: block;
+    width: 100%;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+    background-color: #fafafa;
+    box-sizing: border-box;
+    resize: vertical;
+    outline: none;
+    padding: 1rem;
+    font-family: Monaco, Menlo, Consolas, monospace;
+}
+.textarea:focus {
+    outline: none;
+}
+
+.middle-bar {
+    margin: 1rem 0;
+    overflow: hidden;
+}
+
+.btn {
+    padding: .5rem;
+    background-color: #0070e6;
+    color: #fff;
+    border-radius: 4px;
+    float: right;
+    margin-left: 1rem;
+    cursor: pointer;
+    user-select: none;
+}
+
+.btn:hover {
+    background-color: #0064cd;
+}
+
+.btn:active {
+    background-color: #005cbd;
+}
+
+.footer {
+    margin-top: 1rem;
+    text-align: right;
+}
+
+.footer a {
+    text-decoration: none;
+}
+.footer a:hover  {
+    text-decoration: underline;
+}
+.footer a,
+.footer a:visited {
+    color: #0070e6;
+}

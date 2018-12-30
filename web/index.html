@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Base64 online</title>
+    <link rel="stylesheet" href="src/main.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/zepto/1.2.0/zepto.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="type-inline-block">
+                <div class="type-container">
+                    <div class="type-item active standard" data-type="standard">Standard</div>
+                    <div class="type-item urlsafe" data-type="urlsafe">URL Safe</div>
+                </div>
+            </div>
+        </div>
+        <div class="str-container">
+            <textarea class="str-textarea textarea" placeholder="Input the string to be encoded here..." cols="30" rows="10"></textarea>
+        </div>
+        <div class="middle-bar">
+            <div class="btn btn-to-str">Decode&uarr;</div>
+            <div class="btn btn-to-b64">Encode&darr;</div>
+        </div>
+        <div class="b64-container">
+            <textarea class="b64-textarea textarea" placeholder="Input the string to be decoded here..." cols="30" rows="10"></textarea>
+        </div>
+        <div class="footer">
+            <a target="_blank" href="https://github.com/john-yuan/base64.js">Github Repository</a>
+        </div>
+    </div>
+    <script src="../base64.js"></script>
+    <script src="src/main.js"></script>
+</body>
+</html>
