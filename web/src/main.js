@@ -7,7 +7,7 @@ $(function () {
         var b64 = '';
 
         if (str.length) {
-            if ($type.attr('data-type') === 'standard') {
+            if ($type.attr('data-type') === 'normal') {
                 try {
                     b64 = base64.encodeBase64(str);
                 } catch (e) {
@@ -62,15 +62,15 @@ $(function () {
         }
     });
 
-    (function () {
-        var type = localStorage.getItem('base64.online.type');
+    // (function () {
+    //     var type = localStorage.getItem('base64.online.type');
 
-        if (type) {
-            var $type = $('.type-item.' + type);
-            if ($type[0]) {
-                $('.type-item.active').removeClass('active');
-                $type.addClass('active');
-            }
-        }
-    })();
+    //     if (type) {
+    //         var $type = $('.type-item.' + type);
+    //         if ($type[0]) {
+    //             $('.type-item.active').removeClass('active');
+    //             $type.addClass('active');
+    //         }
+    //     }
+    // })();
 });
