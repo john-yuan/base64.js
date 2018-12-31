@@ -16,7 +16,7 @@ API:
 * [base64.basicEncodeBase64(str, alphabet, pad)](#base64basicencodebase64str-alphabet-pad)
 * [base64.basicDecodeBase64(b64Str, alphabet, pad)](#base64basicdecodebase64b64str-alphabet-pad)
 
-[Click here to try it online.][base64online]
+This library can be used both in the browser and the Node.js environment. [Click here to try it online.][base64online]
 
 [base64online]: https://john-yuan.github.io/base64.js/web/index.html
 
