@@ -32,18 +32,10 @@ $(function () {
         var str = '';
 
         if (b64.length) {
-            if ($type.attr('data-type') === 'standard') {
-                try {
-                    str = base64.decodeBase64(b64);
-                } catch (e) {
-                    alert('ERROR: Failed to decodeBase64');
-                }
-            } else {
-                try {
-                    str = base64.decodeBase64UrlSafe(b64);
-                } catch (e) {
-                    alert('ERROR: Failed to decodeBase64UrlSafe');
-                }
+            try {
+                str = base64.decodeBase64(b64);
+            } catch (e) {
+                alert('ERROR: Failed to decodeBase64');
             }
             $str.val(str);
         }
