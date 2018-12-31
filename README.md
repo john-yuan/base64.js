@@ -9,7 +9,7 @@ A base 64 util for multi-byte string in JavaScript. It can be used to encode mul
 API:
 
 * [base64.encodeBase64(str)](#base64encodebase64str)
-* [base64.encodeBase64UrlSafe(str, [withPadding])](#base64encodebase64urlsafestr-withpadding-1)
+* [base64.encodeBase64UrlSafe(str, [withPadding])](#base64encodebase64urlsafestr-withpadding)
 * [base64.decodeBase64(b64Str)](#base64decodebase64b64str) (decode the normal or URL-safe base 64 encoded string)
 * [base64.str2bytes(str)](#base64str2bytesstr)
 * [base64.bytes2str(bytes)](#base64bytes2strbytes)
