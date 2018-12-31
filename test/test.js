@@ -56,7 +56,7 @@ describe('base64', function () {
         });
     });
 
-    describe('#decodeBase64UrlSafe', function () {
+    describe('#decodeBase64(URL-Safe)', function () {
         var count = 0;
 
         sample.forEach(item => {
@@ -66,7 +66,7 @@ describe('base64', function () {
             count += 1;
 
             it('sample #' + count, function () {
-                var str1 = base64.decodeBase64UrlSafe(b64strUrlSafe);
+                var str1 = base64.decodeBase64(b64strUrlSafe);
                 assert.strictEqual(str, str1);
             });
         });

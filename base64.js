@@ -1,5 +1,9 @@
 var base64 = (function () {
     'use strict';
+    
+    var base64 = {};
+    var b64Alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/';
+    var b64UrlSafeAlphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_';
 
     /**
      * convert unicode string to byte stream
@@ -56,11 +60,11 @@ var base64 = (function () {
      * encode the unicode string to base64 string
      *
      * @param {string} str the unicode string to be encoded
-     * @param {string} b64Table the base64 char table to use
-     * @param {string} paddingChar the base64 padding char to use
+     * @param {string} alphabet the base64 char alphabet to use
+     * @param {string} pad the base64 padding char to use
      * @returns {string} the encoded string
      */
-    var encodeBase64 = function (str, b64Table, paddingChar) {
+    var basicEncodeBase64 = function (str, alphabet, pad) {
         var bytes = str2bytes(str);
         var i = 0, l = bytes.length, chars = [];
         var mod = l % 3, b8 = 0, b6 = 0, need = 6;
@@ -68,35 +72,35 @@ var base64 = (function () {
         while (i < l) {
             b8 = bytes[i++];
             if (need === 6) {
-                chars.push( b64Table.charAt( b8 >> 2 ) );
+                chars.push( alphabet.charAt( b8 >> 2 ) );
                 // 0x03: 0000 0011
                 b6 = (0x03 & b8) << 4;
                 need = 4;
             } else if (need === 4) {
-                chars.push( b64Table.charAt( b6 | (b8 >> 4) ) );
+                chars.push( alphabet.charAt( b6 | (b8 >> 4) ) );
                 // 0x0f: 0000 1111
                 b6 = (0x0f & b8) << 2;
                 need = 2;
             } else if (need === 2) {
-                chars.push( b64Table.charAt( b6 | (b8 >> 6) ) );
+                chars.push( alphabet.charAt( b6 | (b8 >> 6) ) );
                 // 0x3f: 0011 1111
-                chars.push( b64Table.charAt( 0x3f & b8 ) );
+                chars.push( alphabet.charAt( 0x3f & b8 ) );
                 b6 = 0;
                 need = 6;
             }
         }
     
         if (need !== 6) {
-            chars.push( b64Table.charAt(b6) );
+            chars.push( alphabet.charAt(b6) );
         }
     
         chars = chars.join('');
     
-        if (paddingChar) {
+        if (pad) {
             if (mod === 1) {
-                chars = chars + paddingChar + paddingChar;
+                chars = chars + pad + pad;
             } else if (mod === 2) {
-                chars += paddingChar;
+                chars += pad;
             }
         }
     
@@ -107,17 +111,18 @@ var base64 = (function () {
      * decode base64 string to unicode string
      *
      * @param {string} b64Str the base64 string to decoded
-     * @param {string} b64Table the base64 char table to use
-     * @param {string} paddingChar the base64 padding char to use
+     * @param {string} alphabet the base64 char alphabet to use
+     * @param {string} pad the base64 padding char to use
      * @returns {string} the decoded string
+     * @throws {URIError}
      */
-    var decodeBase64 = function (b64Str, b64Table, paddingChar) {
+    var basicDecodeBase64 = function (b64Str, alphabet, pad) {
         var ch, b6, b8 = 0, need = 8, bytes = [], i = 0, l = b64Str.length;
     
         while (i < l) {
             ch = b64Str.charAt(i++);
-            if (ch !== paddingChar) {
-                b6 = b64Table.indexOf(ch);
+            if (ch !== pad) {
+                b6 = alphabet.indexOf(ch);
                 if (need === 8) {
                     b8 = b6 << 2;
                     need = 2;
@@ -144,27 +149,25 @@ var base64 = (function () {
         return bytes2str(bytes);
     };
     
-    var base64 = {};
-    var b64Table = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/';
-    var b64UrlSafeTable = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_';
-    
     /**
-     * convert unicode string to byte stream
-     *
      * @see str2bytes
-     * @param {string} str the string to be converted
-     * @returns {number[]} the byte stream
      */
     base64.str2bytes = str2bytes;
     
     /**
-     * convert byte stream to unicode string
-     *
      * @see bytes2str
-     * @param {number[]} bytes the byte stream to be converted
-     * @returns {string} the unicode string
      */
     base64.bytes2str = bytes2str;
+
+    /**
+     * @see basicEncodeBase64
+     */
+    base64.basicEncodeBase64 = basicEncodeBase64;
+
+    /**
+     * @see basicDecodeBase64
+     */
+    base64.basicDecodeBase64 = basicDecodeBase64;
     
     /**
      * encode unicode string to base64 string
@@ -174,7 +177,19 @@ var base64 = (function () {
      * @returns {string} the base64 encoded string
      */
     base64.encodeBase64 = function (str) {
-        return encodeBase64(str, b64Table, '=');
+        return basicEncodeBase64(str, b64Alphabet, '=');
+    };
+    
+    /**
+     * encode unicode string to base64 url safe string
+     *
+     * @see encodeBase64
+     * @param {string} str the unicode string to be base64 url safe encoded
+     * @param {boolean} [withPadding=false] whether to use the padding char '=' when needed
+     * @returns {string} the base64 url safe encoded string
+     */
+    base64.encodeBase64UrlSafe = function (str, withPadding) {
+        return basicEncodeBase64(str, b64UrlSafeAlphabet, withPadding ? '=' : '');
     };
     
     /**
@@ -184,32 +199,14 @@ var base64 = (function () {
      * @see base64.encodeBase64
      * @param {string} b64Str the base64 string to be decoded
      * @returns {string} the decoded string
+     * @throws {URIError}
      */
     base64.decodeBase64 = function (b64Str) {
-        return decodeBase64(b64Str, b64Table, '=');
-    };
-    
-    /**
-     * encode unicode string to base64 url safe string
-     *
-     * @see encodeBase64
-     * @param {string} str the unicode string to be base64 url safe encoded
-     * @returns {string} the base64 url safe encoded string
-     */
-    base64.encodeBase64UrlSafe = function (str) {
-        return encodeBase64(str, b64UrlSafeTable, '');
-    };
-    
-    /**
-     * decode the base64 url safe encoded string to unicode string
-     *
-     * @see decodeBase64
-     * @see base64.encodeBase64UrlSafe
-     * @param {string} b64StrUrlSafe the base64 url safe encoded string
-     * @returns {string} the decoded string
-     */
-    base64.decodeBase64UrlSafe = function (b64StrUrlSafe) {
-        return decodeBase64(b64StrUrlSafe, b64UrlSafeTable, '');
+        if (b64Str.indexOf('-') > -1 || b64Str.indexOf('_') > -1) {
+            return basicDecodeBase64(b64Str, b64UrlSafeAlphabet, '=');
+        } else {
+            return basicDecodeBase64(b64Str, b64Alphabet, '=');
+        }
     };
 
     return base64;
