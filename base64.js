@@ -56,11 +56,11 @@ var base64 = (function () {
      * encode the unicode string to base64 string
      *
      * @param {string} str the unicode string to be encoded
-     * @param {string} b64Chars the base64 char table to use
+     * @param {string} b64Table the base64 char table to use
      * @param {string} paddingChar the base64 padding char to use
      * @returns {string} the encoded string
      */
-    var encodeBase64 = function (str, b64Chars, paddingChar) {
+    var encodeBase64 = function (str, b64Table, paddingChar) {
         var bytes = str2bytes(str);
         var i = 0, l = bytes.length, chars = [];
         var mod = l % 3, b8 = 0, b6 = 0, need = 6;
@@ -68,26 +68,26 @@ var base64 = (function () {
         while (i < l) {
             b8 = bytes[i++];
             if (need === 6) {
-                chars.push( b64Chars.charAt( b8 >> 2 ) );
+                chars.push( b64Table.charAt( b8 >> 2 ) );
                 // 0x03: 0000 0011
                 b6 = (0x03 & b8) << 4;
                 need = 4;
             } else if (need === 4) {
-                chars.push( b64Chars.charAt( b6 | (b8 >> 4) ) );
+                chars.push( b64Table.charAt( b6 | (b8 >> 4) ) );
                 // 0x0f: 0000 1111
                 b6 = (0x0f & b8) << 2;
                 need = 2;
             } else if (need === 2) {
-                chars.push( b64Chars.charAt( b6 | (b8 >> 6) ) );
+                chars.push( b64Table.charAt( b6 | (b8 >> 6) ) );
                 // 0x3f: 0011 1111
-                chars.push( b64Chars.charAt( 0x3f & b8 ) );
+                chars.push( b64Table.charAt( 0x3f & b8 ) );
                 b6 = 0;
                 need = 6;
             }
         }
     
         if (need !== 6) {
-            chars.push( b64Chars.charAt(b6) );
+            chars.push( b64Table.charAt(b6) );
         }
     
         chars = chars.join('');
@@ -106,18 +106,18 @@ var base64 = (function () {
     /**
      * decode base64 string to unicode string
      *
-     * @param {string} base64 the base64 string to decoded
-     * @param {string} b64Chars the base64 char table to use
+     * @param {string} b64Str the base64 string to decoded
+     * @param {string} b64Table the base64 char table to use
      * @param {string} paddingChar the base64 padding char to use
      * @returns {string} the decoded string
      */
-    var decodeBase64 = function (base64, b64Chars, paddingChar) {
-        var ch, b6, b8 = 0, need = 8, bytes = [], i = 0, l = base64.length;
+    var decodeBase64 = function (b64Str, b64Table, paddingChar) {
+        var ch, b6, b8 = 0, need = 8, bytes = [], i = 0, l = b64Str.length;
     
         while (i < l) {
-            ch = base64.charAt(i++);
+            ch = b64Str.charAt(i++);
             if (ch !== paddingChar) {
-                b6 = b64Chars.indexOf(ch);
+                b6 = b64Table.indexOf(ch);
                 if (need === 8) {
                     b8 = b6 << 2;
                     need = 2;
@@ -145,8 +145,8 @@ var base64 = (function () {
     };
     
     var base64 = {};
-    var b64Chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/';
-    var b64UrlSafeChars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_';
+    var b64Table = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/';
+    var b64UrlSafeTable = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_';
     
     /**
      * convert unicode string to byte stream
@@ -174,7 +174,7 @@ var base64 = (function () {
      * @returns {string} the base64 encoded string
      */
     base64.encodeBase64 = function (str) {
-        return encodeBase64(str, b64Chars, '=');
+        return encodeBase64(str, b64Table, '=');
     };
     
     /**
@@ -186,7 +186,7 @@ var base64 = (function () {
      * @returns {string} the decoded string
      */
     base64.decodeBase64 = function (b64Str) {
-        return decodeBase64(b64Str, b64Chars, '=');
+        return decodeBase64(b64Str, b64Table, '=');
     };
     
     /**
@@ -197,7 +197,7 @@ var base64 = (function () {
      * @returns {string} the base64 url safe encoded string
      */
     base64.encodeBase64UrlSafe = function (str) {
-        return encodeBase64(str, b64UrlSafeChars, '');
+        return encodeBase64(str, b64UrlSafeTable, '');
     };
     
     /**
@@ -209,7 +209,7 @@ var base64 = (function () {
      * @returns {string} the decoded string
      */
     base64.decodeBase64UrlSafe = function (b64StrUrlSafe) {
-        return decodeBase64(b64StrUrlSafe, b64UrlSafeChars, '');
+        return decodeBase64(b64StrUrlSafe, b64UrlSafeTable, '');
     };
 
     return base64;
