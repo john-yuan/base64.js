@@ -74,12 +74,12 @@ var base64 = (function () {
             if (need === 6) {
                 chars.push( alphabet.charAt( b8 >> 2 ) );
                 // 0x03: 0000 0011
-                b6 = (0x03 & b8) << 4;
+                b6 = ( 0x03 & b8 ) << 4;
                 need = 4;
             } else if (need === 4) {
                 chars.push( alphabet.charAt( b6 | (b8 >> 4) ) );
                 // 0x0f: 0000 1111
-                b6 = (0x0f & b8) << 2;
+                b6 = ( 0x0f & b8 ) << 2;
                 need = 2;
             } else if (need === 2) {
                 chars.push( alphabet.charAt( b6 | (b8 >> 6) ) );
@@ -129,12 +129,12 @@ var base64 = (function () {
                 } else if (need === 2) {
                     bytes.push( b8 | ( b6 >> 4 ) );
                     // 0x0f: 0000 1111
-                    b8 = ( b6 & 0x0f) << 4;
+                    b8 = ( b6 & 0x0f ) << 4;
                     need = 4;
                 } else if (need === 4) {
                     bytes.push( b8 | ( b6 >> 2) );
                     // 0x03: 0000 0011
-                    b8 = ( b6 & 0x03) << 6;
+                    b8 = ( b6 & 0x03 ) << 6;
                     need = 6;
                 } else if (need === 6) {
                     bytes.push( b8 | b6 );
