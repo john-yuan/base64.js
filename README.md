@@ -67,7 +67,7 @@ This method is used to encode the given string to base 64 URL and filename safe 
 
 This method is used to decode the base 64 encoded string to the original string. It can decode both the normal and the URL-safe base 64 encoded string. Notice that an error ([URIError][urierror]) may be thrown if `b64Str` is not a valid base 64 encoded string.
 
-* `b64Str ` {string} the base 64 string to ne decoded
+* `b64Str` {string} the base 64 string to ne decoded
 * Returns: {string} the decoded string
 * Throws: {URIError}
 
